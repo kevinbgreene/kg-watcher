@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+
+	<meta charset="UTF-8">
+	<title>Document</title>
+
+</head>
+
+<body>
+
+	<p id="test"></p>
+
+	<script src="js/kg.watcher.min.js"></script>
+
+	<script>
+
+		(function(kg) {
+
+			'use strict';
+
+			// usage
+			var obj = {
+				someVal : 0
+			};
+
+			var test = document.getElementById('test');
+
+			kg.watch(obj, 'someVal', function(newVal, oldVal) {
+
+				test.innerHTML = 'newVal = ' + newVal;
+
+			});
+
+			setTimeout(function() {
+
+				obj.someVal = 5;
+				kg.apply();
+
+			}, 3000);
+
+			setTimeout(function() {
+
+				kg.apply(function() {
+
+					obj.someVal = 10;
+
+				});
+
+			}, 6000);
+
+			// familar with Angular? Yes, it's like Angular, but sometimes I want this without the weight of Angular.
+
+		}(window.kg));
+
+	</script>
+	
+</body>
+
+</html>
